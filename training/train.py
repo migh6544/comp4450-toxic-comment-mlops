@@ -113,7 +113,7 @@ def build_pipeline(args: argparse.Namespace) -> Pipeline:
                         class_weight=class_weight,
                         random_state=args.seed,
                     ),
-                    n_jobs=-1,
+                    n_jobs=1,
                 ),
             ),
         ]
