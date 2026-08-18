@@ -153,4 +153,4 @@ with st.expander("Recent prediction records"):
         ]
         if column in frame.columns
     ]
-    st.dataframe(frame[columns].tail(100), hide_index=True, use_container_width=True)
+    st.dataframe(frame[columns].tail(100), hide_index=True, width="stretch")

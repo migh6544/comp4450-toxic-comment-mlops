@@ -46,7 +46,7 @@ if prediction:
         {"Label": LABEL_DISPLAY[label], "Probability": probability}
         for label, probability in prediction["probabilities"].items()
     ]
-    st.dataframe(probability_rows, hide_index=True, use_container_width=True)
+    st.dataframe(probability_rows, hide_index=True, width="stretch")
     st.caption(
         f"Prediction ID: {prediction['prediction_id']} · "
         f"Inference latency: {prediction['inference_latency_ms']} ms · "
