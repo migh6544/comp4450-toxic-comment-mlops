@@ -30,7 +30,7 @@ class Settings:
     store_raw_text: bool
 
     @classmethod
-    def from_env(cls) -> "Settings":
+    def from_env(cls) -> Settings:
         load_dotenv()
         endpoint = os.getenv("DYNAMODB_ENDPOINT_URL", "").strip() or None
         settings = cls(

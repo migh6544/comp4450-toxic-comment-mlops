@@ -9,7 +9,6 @@ import boto3
 from botocore.exceptions import ClientError
 
 
-
 def to_dynamodb_types(value: Any) -> Any:
     """Recursively convert Python floats into DynamoDB-compatible Decimal values."""
     if isinstance(value, float):

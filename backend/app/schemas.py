@@ -42,7 +42,7 @@ class FeedbackRequest(BaseModel):
         return list(dict.fromkeys(value))
 
     @model_validator(mode="after")
-    def validate_feedback_shape(self) -> "FeedbackRequest":
+    def validate_feedback_shape(self) -> FeedbackRequest:
         if self.is_correct and self.corrected_labels is not None:
             raise ValueError("corrected_labels must be omitted when is_correct=true")
         if not self.is_correct and self.corrected_labels is None:

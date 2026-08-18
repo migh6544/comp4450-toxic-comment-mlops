@@ -39,13 +39,13 @@ class ModelService:
         self.model_version = model_version
 
     @classmethod
-    def from_settings(cls, settings: Settings) -> "ModelService":
+    def from_settings(cls, settings: Settings) -> ModelService:
         if settings.model_source == "local":
             return cls.from_local(settings.local_model_path)
         return cls.from_wandb(settings)
 
     @classmethod
-    def from_local(cls, path: str) -> "ModelService":
+    def from_local(cls, path: str) -> ModelService:
         model_path = Path(path)
         if not model_path.exists():
             raise FileNotFoundError(f"Local model bundle not found: {model_path}")
@@ -53,7 +53,7 @@ class ModelService:
         return cls(bundle=bundle, model_ref=str(model_path), model_version="local")
 
     @classmethod
-    def from_wandb(cls, settings: Settings) -> "ModelService":
+    def from_wandb(cls, settings: Settings) -> ModelService:
         import wandb
 
         artifact_ref = (
