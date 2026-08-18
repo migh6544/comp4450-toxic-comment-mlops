@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments and secrets
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Data and generated artifacts
+data/raw/
+artifacts/*
+!artifacts/.gitkeep
+wandb/
+
+# Local AWS / Docker state
+.aws-sam/

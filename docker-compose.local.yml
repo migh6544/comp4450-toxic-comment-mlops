@@ -1,0 +1,46 @@
+services:
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    command: "-jar DynamoDBLocal.jar -sharedDb -inMemory"
+    ports:
+      - "8001:8000"
+
+  backend:
+    build: ./backend
+    depends_on:
+      - dynamodb-local
+    environment:
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: local
+      AWS_SECRET_ACCESS_KEY: local
+      DYNAMODB_TABLE: comp4450-toxic-comment-predictions
+      DYNAMODB_ENDPOINT_URL: http://dynamodb-local:8000
+      MODEL_SOURCE: local
+      LOCAL_MODEL_PATH: /models/toxic_comment_model.joblib
+      STORE_RAW_TEXT: "true"
+    volumes:
+      - ./artifacts:/models:ro
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    environment:
+      API_URL: http://backend:8000
+    ports:
+      - "8501:8501"
+
+  monitoring:
+    build: ./monitoring
+    depends_on:
+      - dynamodb-local
+    environment:
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: local
+      AWS_SECRET_ACCESS_KEY: local
+      DYNAMODB_TABLE: comp4450-toxic-comment-predictions
+      DYNAMODB_ENDPOINT_URL: http://dynamodb-local:8000
+    ports:
+      - "8502:8501"
